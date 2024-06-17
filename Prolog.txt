@@ -1,0 +1,18 @@
+water(X,Y):-X>4,Y<3,write('4L jug overflow'),nl.
+water(X,Y):-X<4,Y>3,write('3L jug overflow'),nl.
+water(X,Y):-X>4,Y>3,write('Both jug overflow'),nl.
+water(X,Y):-(X=:=0,Y=:=0,nl,write('4L=0 and 3L=3 (step taken:Fill 3L jug.)'),YY is 3,water(X,YY));
+(X=:=0,Y=:=0,nl,write('4L=4 and 3L=0 (step taken:Fill 4L jug.)'),XX is 4,water(XX,Y));
+(X=:=2,Y=:=0,nl,write('4L=2 and 3L=0 (step taken:Goal Reached.)'));
+(X=:=4,Y=:=0,nl,write('4L=1 and 3L=3 (step taken:pour water from 4L jug to 3L jug.)'),XX is X-3,YY is 3,water(XX,YY));
+(X=:=0,Y=:=3,nl,write('4L=3 and 3L=0 (step taken:pour water from 3L jug to 4L jug.)'),XX is 3,YY is 0,water(XX,YY));
+(X=:=1,Y=:=3,nl,write('4L=1 and 3L=0 (step taken:Empty 3L jug.)'),YY is 0,water(X,YY));
+(X=:=3,Y=:=3,nl,write('4L=3 and 3L=3 (step taken:Fill 3L jug.)'),YY is 3,water(X,YY));
+
+(X=:=3,Y=:=3,nl,write('4L=4 and 3L=2 (step taken:pour water from 3L jug to 4L jug until 4L jug is FULL.)'),XX is X+1,YY is Y-1,water(XX,YY));
+(X=:=1,Y=:=0,nl,write('4L=0 and 3L=1 (step taken:pour water from 4L jug to 3L jug.)'),XX is Y,YY is X,water(XX,YY));
+(X=:=0,Y=:=1,nl,write('4L=4 and 3L=1 (step taken:Fill 4L jug.)'),XX is 4,water(XX,Y));
+(X=:=4,Y=:=1,nl,write('4L=2 and 3L=3 (step taken:pour water from 4L jug to 3L jug until 3L Jug is FULL.)'),XX is X-2,YY is Y+2,water(XX,YY));
+(X=:=2,Y=:=3,nl,write('4L=2 and 3L=0 (step taken:Empty 3L jug.)'),YY is 0,water(X,YY));
+(X=:=4,Y=:=2,nl,write('4L=0 and 3L=2 (step taken:Empty 4L jug.)'),XX is 0,water(XX,Y));
+(X=:=0,Y=:=2,nl,write('4L=2 and 3L=0 (step taken:pour water from 3L jug to 4L jug.)'),XX is Y,YY is X,water(XX,YY)).
