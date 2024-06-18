@@ -16,3 +16,28 @@ water(X,Y):-(X=:=0,Y=:=0,nl,write('4L=0 and 3L=3 (step taken:Fill 3L jug.)'),YY 
 (X=:=2,Y=:=3,nl,write('4L=2 and 3L=0 (step taken:Empty 3L jug.)'),YY is 0,water(X,YY));
 (X=:=4,Y=:=2,nl,write('4L=0 and 3L=2 (step taken:Empty 4L jug.)'),XX is 0,water(XX,Y));
 (X=:=0,Y=:=2,nl,write('4L=2 and 3L=0 (step taken:pour water from 3L jug to 4L jug.)'),XX is Y,YY is X,water(XX,YY)).
+
+
+
+
+
+
+fill(x,y). fill(2,0):-nl,write('goal state reached.	'). fill(x,y):-
+x=0,y=<1,nl,write('Fill the 4-Gallon jug:(4,'),write(y),write(')'), fill(4,y).
+
+fill(x,y):-x=3,y=0,nl,write('Fill the 3-Gallon jug:),write(x),write(',3)'), fill(x,3).
+
+fill(x,y):-x+y>=4,y=3,x=3,y1 is y-(4-x),nl,write('Pour water from 3-Gallon jug to 4-Gallon until it is full: (4,'), write(y1),write(')'),fill(4,y1).
+
+fill(x,y):-x+y>=3,x=4,y=<1,x1 is x-(3-y),nl,write('Pour water from 4-Gallon jug to 3-Gallon until it is full:'), write(x1),write(',3)'),fill(x1,3).
+
+fill(x,y):-x+y=<4,x=0,y>1,x1 is x+y,nl,write('Pour water from 3-Gallon jug to 4Gallon:'),write(x1),write(',0)'),fill(x1,0).
+
+fill(x,y):-x+y<3,y=0,y1 is x+y,nl,write('Pour water from 4-Gallon jug to 3Gallon:(0,'),write(y1),write(')'),fill(0,y1).
+
+fill(x,y):-y=2,x=4,nl,write('Empty the 4-Gallon jug on ground:(0,'),write(y),write(')'),fill(0,y).
+
+fill(x,y):-y=3,x>=1,nl,write('Empty the 3-Gallon jug on ground:('),write(x),write(',0)'),fill(x,0). fill(x,y):-x>4,y<3,write('4L jug overflowed.'),nl.
+fill(x,y):-x<4,y>3,write('3L jug overflowed.'),nl.
+
+fill(x,y):-x>4,y>3,write('Both 3L and 4L jug overflowed.').
